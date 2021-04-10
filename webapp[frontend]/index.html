@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <title>STealth</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="boot/css/bootstrap.min.css">
+  <script src="boot/jquery/jquery.min.js"></script>
+  <script src="boot/js/bootstrap.min.js"></script>
+
+
+  <style>
+
+
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+
+
+      /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+      .row.content {height: 550px}
+
+      /* Set gray background color and 100% height */
+      .sidenav {
+        background-color: #f1f1f1;
+        height: 100%;
+      }
+
+      /* On small screens, set height to 'auto' for the grid */
+      @media screen and (max-width: 767px) {
+        .row.content {height: auto;}
+      }
+
+      .navbar-custom {
+          background-color: #A8BAC8;
+          color:#52568D;
+          border-radius:0;
+      }
+
+      .navbar-custom .navbar-nav > li > a {
+          color:#52568D;
+          font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      }
+
+      .navbar-custom .navbar-nav > .active > a {
+          color: #52568D;
+          background-color:transparent;
+          font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      }
+
+      .navbar-custom .navbar-nav > li > a:hover,
+      .navbar-custom .navbar-nav > li > a:focus,
+      .navbar-custom .navbar-nav > .active > a:hover,
+      .navbar-custom .navbar-nav > .active > a:focus,
+      .navbar-custom .navbar-nav > .open >a {
+          text-decoration: none;
+          background-color: #869db1;
+          border-bottom: solid;
+      }
+
+      .navbar-custom .navbar-brand {
+          color:#52568D;
+          font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+          border-bottom: solid;
+
+      }
+      .navbar-custom .navbar-toggle {
+          background-color:#52568D;
+
+      }
+      .navbar-custom .icon-bar {
+          background-color: #A8BAC8;
+      }
+
+      #analisi {
+        background-color: #ffffff;
+        color: #52568D;
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        border: solid;
+      }
+
+
+  </style>
+
+  <style type="text/css">
+   body { background: #ffffff !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+</style>
+
+
+
+
+</head>
+
+<body>
+<script>
+async function update() {
+    var source = 'snapshot.jpg',
+        timestamp = (new Date()).getTime(),
+        newUrl = source + '?_=' + timestamp;
+    document.getElementById("cam").src = newUrl;
+}
+
+function getImageDimensions(file) {
+  return new Promise (function (resolved, rejected) {
+    var i = new Image()
+    i.onload = function(){
+      resolved({w: i.width, h: i.height})
+    };
+    i.src = file
+  })
+}
+//setInterval(update, 1000);
+</script>
+<script language="JavaScript">
+
+const stringjson='{ \
+          \"car\":[{\"image\":\"img/car.jpg\"},{\"more\":\"https://www.st.com/content/st_com/en/search.html#q=car-t=solutions-page=1\"},\
+          {\"board\":{\"name\":\"STFDA803D\",\"link\":\"https://www.st.com/en/automotive-infotainment-and-telematics/fda803d.html\"}},    \
+          {\"board\":{\"name\":\"SPC57K-Discovery\",\"link\":\"https://www.st.com/en/evaluation-tools/spc57k-discovery.html\"}},    \
+          {\"board\":{\"name\":\"AEKD-AFLPANEL1\",\"link\":\"https://www.st.com/en/evaluation-tools/aekd-aflpanel1.html\"}},    \
+          {\"board\":{\"name\":\"SPC56P-Discovery\",\"link\":\"https://www.st.com/en/evaluation-tools/spc56p-discovery.html\"}}],    \
+          \"bus\":[{\"image\":\"img/bus.jpg\"},{\"more\":\"https://www.st.com/content/st_com/en/search.html#q=car-t=solutions-page=1\"},\
+          {\"board\":{\"name\":\"STFDA803D\",\"link\":\"https://www.st.com/en/automotive-infotainment-and-telematics/fda803d.html\"}},    \
+          {\"board\":{\"name\":\"SPC57K-Discovery\",\"link\":\"https://www.st.com/en/evaluation-tools/spc57k-discovery.html\"}},    \
+          {\"board\":{\"name\":\"AEKD-AFLPANEL1\",\"link\":\"https://www.st.com/en/evaluation-tools/aekd-aflpanel1.html\"}},    \
+          {\"board\":{\"name\":\"X-NUCLEO-IDB05A2\",\"link\":\"https://www.st.com/en/ecosystems/x-nucleo-idb05a2.html\"}}],    \
+          \"truck\":[{\"image\":\"img/truck.jpg\"},{\"more\":\"https://www.st.com/content/st_com/en/search.html#q=car-t=solutions-page=1\"},\
+          {\"board\":{\"name\":\"STFDA803D\",\"link\":\"https://www.st.com/en/automotive-infotainment-and-telematics/fda803d.html\"}},    \
+          {\"board\":{\"name\":\"SPC57K-Discovery\",\"link\":\"https://www.st.com/en/evaluation-tools/spc57k-discovery.html\"}},    \
+          {\"board\":{\"name\":\"AEKD-AFLPANEL1\",\"link\":\"https://www.st.com/en/evaluation-tools/aekd-aflpanel1.html\"}},    \
+          {\"board\":{\"name\":\"SPC56P-Discovery\",\"link\":\"https://www.st.com/en/evaluation-tools/spc56p-discovery.html\"}},\
+          {\"board\":{\"name\":\"X-NUCLEO-IDB05A2\",\"link\":\"https://www.st.com/en/ecosystems/x-nucleo-idb05a2.html\"}}],    \
+          \"boat\":[{\"image\":\"img/boat.jpg\"},{\"more\":\"https://www.st.com/content/st_com/en/search.html#q=boat-t=solutions-page=1\"},\
+          {\"board\":{\"name\":\"STEVAL-IPM07F\",\"link\":\"https://www.st.com/en/evaluation-tools/steval-ipm07f.html\"}},    \
+          {\"board\":{\"name\":\"X-NUCLEO-GNSS1A1\",\"link\":\"https://www.st.com/en/ecosystems/x-nucleo-gnss1a1.html\"}},    \
+          {\"board\":{\"name\":\"STM32L476G-EVAL\",\"link\":\"https://www.st.com/en/evaluation-tools/stm32l476g-eval.html\"}},    \
+          {\"board\":{\"name\":\"HTS221\",\"link\":\"https://www.st.com/en/evaluation-tools/steval-mki141v2.html\"}}],\
+          \"traffic light\":[{\"image\":\"img/traffic.jpg\"},{\"more\":\"https://www.st.com/content/st_com/en/search.html#q=traffic%20light-t=resources-page=1\"},\
+          {\"board\":{\"name\":\"VIPER37\",\"link\":\"https://www.st.com/en/power-management/viper37.html\"}},    \
+          {\"board\":{\"name\":\"LED6001\",\"link\":\"https://www.st.com/en/power-management/led6001.html\"}}],    \
+          \"parking meter\":[{\"image\":\"img/parking.jpg\"},{\"more\":\"https://www.st.com/content/st_com/en/search.html#q=parking%20meter-t=resources-page=1\"},\
+          {\"board\":{\"name\":\"X-NUCLEO-NFC05A1\",\"link\":\"https://www.st.com/content/st_com/en/search.html#q=X-NUCLEO-NFC05A1-t=tools-page=1\"}},    \
+          {\"board\":{\"name\":\"ST8024L\",\"link\":\"https://www.st.com/content/st_com/en/products/interfaces-and-transceivers/smartcard-interfaces/st8024l.html\"}}],    \
+          \"tv\":[{\"image\":\"img/tv.jpg\"},{\"more\":\"https://www.st.com/content/st_com/en/search.html#q=tv-t=resources-page=1\"},\
+          {\"board\":{\"name\":\"STEVAL-ISA170V1\",\"link\":\"https://www.st.com/en/evaluation-tools/steval-isa170v1.html\"}},    \
+          {\"board\":{\"name\":\"STEVAL-ILL020V1\",\"link\":\"https://www.st.com/content/st_com/en/products/evaluation-tools/solution-evaluation-tools/led-and-general-lighting-solution-eval-boards/steval-ill020v1.html\"}},    \
+          {\"board\":{\"name\":\"X-NUCLEO-GFX01M1\",\"link\":\"https://www.st.com/en/evaluation-tools/x-nucleo-gfx01m1.html\"}}],    \
+          \"laptop\":[{\"image\":\"img/laptop.jpg\"},{\"more\":\"https://www.st.com/content/st_com/en/search.html#q=laptop-t=resources-page=1\"},\
+          {\"board\":{\"name\":\"STLM75\",\"link\":\"https://www.st.com/content/st_com/en/products/mems-and-sensors/temperature-sensors/stlm75.html\"}},    \
+          {\"board\":{\"name\":\"STM32F429I-DISC1\",\"link\":\"https://www.st.com/content/st_com/en/products/evaluation-tools/product-evaluation-tools/mcu-mpu-eval-tools/stm32-mcu-mpu-eval-tools/stm32-discovery-kits/32f429idiscovery.html\"}},    \
+          {\"board\":{\"name\":\"STEVAL-CCA023V1\",\"link\":\"https://www.st.com/content/st_com/en/products/evaluation-tools/solution-evaluation-tools/digital-consumer-solutions-eval-boards/steval-cca023v1.html\"}},    \
+          {\"board\":{\"name\":\"KBMF\",\"link\":\"https://www.st.com/content/st_com/en/products/emi-filtering-and-signal-conditioning/integrated-emi-filtering-and-esd-protection/computer-legacy-port-ipad/kbmf.html\"}}],\
+          \"mouse\":[{\"image\":\"img/mouse.jpg\"},{\"more\":\"https://www.st.com/content/st_com/en/search.html#q=laptop-t=resources-page=1\"},\
+          {\"board\":{\"name\":\"TCPP01-M12\",\"link\":\"https://www.st.com/content/st_com/en/products/protection-devices/esd-protection/usb-port-protection/tcpp01-m12.html\"}},    \
+          {\"board\":{\"name\":\"BlueNRG-2\",\"link\":\"https://www.st.com/content/st_com/en/products/wireless-connectivity/short-range/bluetooth-low-energy-application-processors/bluenrg-2.html\"}}],    \
+          \"keyboard\":[{\"image\":\"img/keyboard.jpg\"},{\"more\":\"https://www.st.com/content/st_com/en/search.html#q=parking%20meter-t=resources-page=1\"},\
+          {\"board\":{\"name\":\"BlueNRG-2\",\"link\":\"https://www.st.com/content/st_com/en/products/wireless-connectivity/short-range/bluetooth-low-energy-application-processors/bluenrg-2.html\"}},    \
+          {\"board\":{\"name\":\"KBMF\",\"link\":\"https://www.st.com/content/st_com/en/products/emi-filtering-and-signal-conditioning/integrated-emi-filtering-and-esd-protection/computer-legacy-port-ipad/kbmf.html\"}}],\
+          \"cell phone\":[{\"image\":\"img/cell.jpg\"},{\"more\":\"https://www.st.com/content/st_com/en/search.html#q=cell%20phone-t=solutions-page=1\"},\
+          {\"board\":{\"name\":\"STEVAL-MKI187V1\",\"link\":\"https://www.st.com/content/st_com/en/products/evaluation-tools/solution-evaluation-tools/sensor-solution-eval-boards/steval-mki187v1.html\"}},    \
+          {\"board\":{\"name\":\"P-NUCLEO-53L0A1\",\"link\":\"https://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-sense-hw/p-nucleo-53l0a1.html\"}},    \
+          {\"board\":{\"name\":\"HTS221\",\"link\":\"https://www.st.com/en/evaluation-tools/steval-mki141v2.html\"}},    \
+          {\"board\":{\"name\":\"LSM6DSOX\",\"link\":\"https://www.st.com/en/mems-and-sensors/lsm6dsox.html\"}},    \
+          {\"board\":{\"name\":\"LPS22HH\",\"link\":\"https://www.st.com/content/st_com/en/products/mems-and-sensors/pressure-sensors/lps22hh.html\"}}],    \
+          \"microwave\":[{\"image\":\"img/microwave.jpg\"},{\"more\":\"https://www.st.com/content/st_com/en/search.html#q=microwave-t=products-page=1\"},\
+          {\"board\":{\"name\":\"STEVAL-GLA001V1\",\"link\":\"https://www.st.com/content/st_com/en/products/evaluation-tools/solution-evaluation-tools/motor-control-solution-eval-boards/brushed-motors/steval-gla001v1.html\"}},    \
+          {\"board\":{\"name\":\"STTS751\",\"link\":\"https://www.st.com/content/st_com/en/products/mems-and-sensors/temperature-sensors/stts751.html\"}}],\
+          \"oven\":[{\"image\":\"img/oven.jpg\"},{\"more\":\"https://www.st.com/content/st_com/en/search.html#q=microwave-t=products-page=1\"},\
+          {\"board\":{\"name\":\"STEVAL-GLA001V1\",\"link\":\"https://www.st.com/content/st_com/en/products/evaluation-tools/solution-evaluation-tools/motor-control-solution-eval-boards/brushed-motors/steval-gla001v1.html\"}},    \
+          {\"board\":{\"name\":\"STTS751\",\"link\":\"https://www.st.com/content/st_com/en/products/mems-and-sensors/temperature-sensors/stts751.html\"}}],\
+          \"toaster\":[{\"image\":\"img/toaster.jpg\"},{\"more\":\"https://www.st.com/content/st_com/en/search.html#q=microwave-t=products-page=1\"},\
+          {\"board\":{\"name\":\"STEVAL-GLA001V1\",\"link\":\"https://www.st.com/content/st_com/en/products/evaluation-tools/solution-evaluation-tools/motor-control-solution-eval-boards/brushed-motors/steval-gla001v1.html\"}},    \
+          {\"board\":{\"name\":\"STTS751\",\"link\":\"https://www.st.com/content/st_com/en/products/mems-and-sensors/temperature-sensors/stts751.html\"}}],\
+          \"refrigerator\":[{\"image\":\"img/refrigerator.jpg\"},{\"more\":\"https://www.st.com/content/st_com/en/search.html#q=refrigerator-t=resources-page=1\"},\
+          {\"board\":{\"name\":\"HTS221\",\"link\":\"https://www.st.com/content/st_com/en/products/mems-and-sensors/humidity-sensors/hts221.html\"}},    \
+          {\"board\":{\"name\":\"STEVAL-IHM036V1\",\"link\":\"https://www.st.com/content/st_com/en/products/evaluation-tools/solution-evaluation-tools/motor-control-solution-eval-boards/3-phase-motors-pmsm-bldc-acim/steval-ihm036v1.html\"}},    \
+          {\"board\":{\"name\":\"STEVAL-IPMNM1N\",\"link\":\"https://www.st.com/en/evaluation-tools/steval-ipmnm1n.html\"}},    \
+          {\"board\":{\"name\":\"STEVAL-IPFC01V1\",\"link\":\"https://www.st.com/content/st_com/en/products/evaluation-tools/solution-evaluation-tools/psu-and-converter-solution-eval-boards/ac-dc-converter/steval-ipfc01v1.html\"}}],    \
+          \"airplane\":[{\"image\":\"img/airplane.jpg\"},{\"more\":\"https://www.st.com/content/st_com/en/search.html#q=airplane-t=solutions-page=1\"},\
+          {\"board\":{\"name\":\"STEVAL-IPM07F\",\"link\":\"https://www.st.com/en/evaluation-tools/steval-ipm07f.html\"}},    \
+          {\"board\":{\"name\":\"STEVAL-DRONE01\",\"link\":\"https://www.st.com/en/evaluation-tools/steval-drone01.html\"}},    \
+          {\"board\":{\"name\":\"LSM6DSOX\",\"link\":\"https://www.st.com/en/mems-and-sensors/lsm6dsox.html\"}},    \
+          {\"board\":{\"name\":\"LPS22HH\",\"link\":\"https://www.st.com/content/st_com/en/products/mems-and-sensors/pressure-sensors/lps22hh.html\"}}]    \
+}';
+
+var dataset=JSON.parse(stringjson);
+
+		 async function take_snapshot() {
+			// take snapshot and get image data
+			   Webcam.snap( async function(data_uri) {
+				// convert to base64
+        var dimensions = await getImageDimensions(data_uri)
+        console.log(dimensions.w)
+        console.log(dimensions.h)
+
+        sessionStorage.setItem("immaginebase64",data_uri);
+
+
+
+
+        var base64result = data_uri.split(',')[1];
+        var image=base64result
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        raw=JSON.stringify({image});
+        var requestOptions = {
+                              method: 'POST',
+                              headers: myHeaders,
+                              body: raw,
+                              redirect: 'follow'
+                             };
+        const response= await fetch("https://stealth.run/image", requestOptions);
+        const result = await response.json();
+        sessionStorage.setItem("result",JSON.stringify(result));
+        document.getElementById('classe').innerHTML =result.result+" detected"
+        console.log(result.location)
+        document.getElementById('Applications').innerHTML="";
+        document.getElementById('prodotti').innerHTML="";
+        detection=result.result
+
+
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        var img = new Image();   // Create new img element
+        img.src =data_uri
+        img.onload = function() {
+        ctx.drawImage(img, 0, 0);
+        // Blue rectangle
+        ctx.beginPath();
+        ctx.lineWidth = "10";
+        ctx.strokeStyle = "blue";
+        ctx.rect(result.location[0], result.location[1], result.location[2], result.location[3]);
+        ctx.stroke();
+        };
+
+
+
+
+
+
+
+
+
+
+                var i,text;
+                text=""
+                console.log(dataset[detection])
+
+                for (i = 0; i < dataset[detection].length-2; i++) {
+                var buff=dataset[detection][i+2]
+                console.log(buff.board.name)
+                text+= "<a href="+buff.board.link+">";
+                text += buff.board.name + "</a><br><br>";
+                }
+                text+= "<a href="+dataset[detection][1].more+">";
+                text += "  <button type=\"button\" style=\"background-color:#52568D; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\" class=\"btn btn-primary\">Go to ST site</button>" + "</a><br><br>";
+                document.getElementById('prodotti').innerHTML=text;
+                text=""
+                text+="<img src=\""+dataset[detection][0].image+"\"class=\"img-thumbnail\" >"+"<br><br><br><br>";
+                document.getElementById('Applications').innerHTML=text;
+			} );
+		}
+	</script>
+
+
+
+
+
+<nav class="navbar navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">STealth</a>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="index.html">Dashboard</a></li>
+        <li><a href="game.html">Game</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div style="background:transparent !important" class="jumbotron center">
+  <div class="container text-center">
+    <img src="img/logo.png" class="img-responsive center" alt="cover">
+    <p id="analisi">Analyze something with your camera, let's see what I can find on ST database</p>
+  </div>
+</div>
+
+
+
+<div class="container-fluid bg-3">
+  <div class="row">
+    <div class="col-sm-2">
+
+</div>
+<div class="col-sm-4">
+  <div class="well" style="background-color: #ffffff; text-align: center; color:#52568D;border:solid; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+    <h2>Camera</h2>
+
+    <div class="select">
+      <label for="audioSource">Audio not used </label><select id="audioSource"></select>
+    </div>
+
+
+      <div class="select">
+        <label for="videoSource">Video source: </label><select id="videoSource"></select>
+      </div>
+  <!-- First, include the Webcam.js JavaScript Library -->
+  <script type="text/javascript" src="/boot/js/webcam.min.js"></script>
+  <!-- Configure a few settings and attach camera -->
+    <div class="d-flex justify-content-center" id="my_camera">
+  <script language="JavaScript">
+    var cameras = new Array(); //create empty array to later insert available devices
+        navigator.mediaDevices.enumerateDevices() // get the available devices found in the machine
+        .then(function(devices) {
+          var dispositivi="";
+        devices.forEach(function(device) {
+        var i = 0;
+        dispositivi+=device.deviceId+"\n";
+
+          console.log(device.deviceId);
+        if(device.kind=== "videoinput"){ //filter video devices only
+        cameras[i]= device.deviceId; // save the camera id's in the camera array
+
+        i++;
+        }
+        });
+
+        })
+
+
+    Webcam.set( {
+      width: 240,
+      height: 240,
+      image_format: 'jpeg',
+      jpeg_quality: 90,
+      sourceId: cameras[0],
+    });
+    Webcam.attach( '#my_camera' );
+
+  </script>
+  <!-- A button for taking snaps -->
+</div>
+<div class="text-center">
+  <button type="button" style="background-color:#52568D; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="btn btn-primary" onClick="take_snapshot()">Scan object</button>
+</div>
+
+
+</div>
+</div>
+<div class="col-sm-4">
+  <div class="well" style="background-color: #ffffff; text-align: center; color:#52568D;border:solid;">
+    <h2 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Result</h2>
+    <canvas id="myCanvas" width="240" height="240">
+    Your browser does not support the HTML5 canvas tag.</canvas>
+
+
+
+
+
+<p id="classe"></p>
+    </div>
+
+</div>
+<div class="col-sm-2">
+
+</div>
+</div>
+</div>
+
+
+
+<div class="container-fluid bg-3">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="well" style="background-color: #ffffff; text-align: center; color:#52568D;border:solid; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+<h2>BIll of materials</h2>
+
+<div class="products">
+<p id="prodotti"></p>
+</div>
+</div>
+</div>
+<div class="col-sm-8">
+  <div class="well" style="background-color: #ffffff; text-align: center; color:#52568D;border:solid; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+<h2>Schema a blocchi</h2>
+<div class="applications">
+<p id="Applications"></p>
+
+
+
+
+
+
+
+
+
+
+  <script async src="js/main.js" type="9386a01c858ccc46ff5daa6e-text/javascript"></script>
+
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+
+  <script async src="/boot/js/main.js" type="9386a01c858ccc46ff5daa6e-text/javascript"></script>
+
+<script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="9386a01c858ccc46ff5daa6e-|49" defer=""></script>
+</body>
+</html>
